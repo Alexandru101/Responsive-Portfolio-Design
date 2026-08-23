@@ -173,7 +173,88 @@ export default function Home() {
                         </div>
 
                         <div className={styles.editor__body}>
+                            <div className={styles.editor__textarea}>
+                                <span className={styles["editor__textarea-line"]}>1</span>
+                                
+                                <span className={styles["editor__textarea-row"]}>
+                                    <span className={styles["editor__textarea-keyword"]}>const</span>{" "}
+                                    developer = 
+                                    <span className={styles["editor__textarea-punctuation"]}>{"{"}</span>
+                                </span>
+                            </div>
 
+                            <div className={styles.editor__textarea}>
+                                <span className={styles["editor__textarea-line"]}>2</span>
+
+                                <span className={styles["editor_textarea-row"]}>
+                                    &nbsp;&nbsp;
+                                    name:{" "}
+                                    <span className={styles["editor__textarea-string"]}>"Alexandru"</span>
+                                </span>
+                            </div>
+
+                            <div className={styles.editor__textarea}>
+                                <span className={styles["editor__textarea-line"]}>3</span>
+
+                                <span className={styles["editor__textarea-row"]}>
+                                    &nbsp;&nbsp;
+                                    role:{" "}
+                                    <span className={styles["editor__textarea-string"]}>"Full-Stack Developer"</span>
+                                </span>
+                            </div>
+
+                            <div className={styles.editor__textarea}>
+                                <span className={styles["editor__textarea-line"]}>4</span>
+
+                                <span className={styles["editor__textarea-row"]}>
+                                    &nbsp;&nbsp;
+                                    stack:{" "}
+
+                                    <span className={styles["editor__textarea-punctuation"]}>{"["}</span>
+                                    <span className={styles["editor__textarea-string"]}>
+                                        {`"Typescript", "React", "Node.js"`}
+                                    </span>
+                                    <span className={styles["editor__textarea-punctuation"]}>{"]"}</span>
+                                </span>
+                            </div>
+
+                            <div className={styles.editor__textarea}>
+                                <span className={styles["editor__textarea-line"]}>5</span>
+
+                                <span className={styles["editor__textarea-row"]}>
+                                    &nbsp;&nbsp;
+                                    monthsBuilding:{" "}
+                                    <span className={styles["editor__textarea-number"]}>8</span>
+                                </span>
+                            </div>
+
+                            <div className={styles.editor__textarea}>
+                                <span className={styles["editor__textarea-line"]}>6</span>
+
+                                <span className={styles["editor__textarea-row"]}>
+                                    &nbsp;&nbsp;
+                                    focus:{" "}
+                                    <span className={styles["editor__textarea-string"]}>"Clean, scalable projects"</span>
+                                </span>
+                            </div>
+
+                            <div className={styles.editor__textarea}>
+                                <span className={styles["editor__textarea-line"]}>7</span>
+
+                                <span className={styles["editor__textarea-row"]}>
+                                    &nbsp;&nbsp;
+                                    openToWork:{" "}
+                                    <span className={styles["editor__textarea-keyword"]}>true</span>
+                                </span>
+                            </div>
+
+                            <div className={styles.editor__textarea}>
+                                <span className={styles["editor__textarea-line"]}>8</span>
+
+                                <span className={styles["editor__textarea-row"]}>
+                                    <span className={styles["editor__textarea-punctuation"]}>{"}"}</span>
+                                </span>
+                            </div>
                         </div>
 
                         <div className={styles.editor__footer}>
