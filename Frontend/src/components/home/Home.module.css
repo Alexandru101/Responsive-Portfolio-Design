@@ -253,15 +253,89 @@
 }
 
 .editor {
-    height: 20rem; /* Remove this line later */
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    border: 1px solid #ffffff27;
-    border-radius: 10px;
     background: #100d20;
+    color: #5e667e;
+}
+
+.editor__header {
+    height: 3rem;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    border: 1px solid #ffffff13;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 1rem;
+
+    background: #191529;
+}
+
+.editor__header-dots {
+    font-size: 0.7rem;
+    display: flex;
+    gap: 0.3rem;
+}
+
+.editor__header-dots--red {
+    color: #ff5f57;
+}
+
+.editor__header-dots--yellow {
+    color: #febc2e;
+}
+
+.editor__header-dots--green {
+    color: #28c840;
+}
+
+.editor__title {
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.editor__status {
+    color: #dae07f;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.editor__status-dot {
+    font-size: 0.5rem;
+}
+
+.editor__status-text {
+    font-size: 0.75rem;
+}
+
+.editor__body {
+    height: 20rem;
+    width: 100%;
+
+    border: 1px solid #ffffff13;
+}
+
+.editor__footer {
+    height: 3rem;
+    width: 100%;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: 1px solid #ffffff13;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 1.25rem;
 }
 
 .about--visible {

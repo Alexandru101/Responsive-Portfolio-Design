@@ -6,7 +6,7 @@ import styles from "./Home.module.css";
 // Images + Icons //
 import avatar from "../../assets/avatar.png";
 import { LuLayers3, LuBriefcaseBusiness, LuUserRound, LuMail, LuMouse } from "react-icons/lu";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter, FaCircle } from "react-icons/fa";
 import { BiChevronDown } from "react-icons/bi";
 
 // Functions //
@@ -157,12 +157,29 @@ export default function Home() {
 
                 <div ref={aboutSectionRightRef} className={styles.about__rightSide}>
                     <div className={styles.editor}>
-                        
-                        {/* <-- Header */}
+                        <div className={styles.editor__header}>
+                            <div className={styles["editor__header-dots"]}>
+                                <FaCircle className={styles["editor__header-dots--red"]} />
+                                <FaCircle className={styles["editor__header-dots--yellow"]} />
+                                <FaCircle className={styles["editor__header-dots--green"]} />
+                            </div>
 
-                        {/* <-- Body */}
+                            <span className={styles.editor__title}>profile.tsx</span>
+                            
+                            <div className={styles.editor__status}>
+                                <FaCircle className={styles["editor__status-dot"]} />
+                                <span className={styles["editor__status-text"]}>online</span>
+                            </div>
+                        </div>
 
-                        {/* <-- Footer */}
+                        <div className={styles.editor__body}>
+
+                        </div>
+
+                        <div className={styles.editor__footer}>
+                            <span>Typescript</span>
+                            <span>UTF-8</span>
+                        </div>
                     </div>
                 </div>
             </section>
