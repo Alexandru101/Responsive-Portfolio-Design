@@ -340,11 +340,6 @@
     font-size: 0.9rem;
 }
 
-.editor__textarea-row {
-    display: flex;
-    gap: 0.5rem;
-}
-
 .editor__textarea-keyword {
     color: #467ee6;
 }
