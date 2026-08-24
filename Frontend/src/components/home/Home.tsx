@@ -1,5 +1,5 @@
 // Modules //
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
 
@@ -10,6 +10,137 @@ import { FaGithub, FaLinkedin, FaTwitter, FaCircle } from "react-icons/fa";
 import { BiChevronDown } from "react-icons/bi";
 
 // Functions //
+function loadBackgroundAnim(
+    pageRef: React.RefObject<HTMLDivElement | null>,
+    canvasRef: React.RefObject<HTMLCanvasElement | null>
+) {
+    useEffect(() => {
+        const page = pageRef.current;
+        const canvas = canvasRef.current;
+
+        if (!page || !canvas) return;
+
+        const ctx = canvas.getContext("2d");
+
+        if (!ctx) return;
+
+        let width = 0;
+        let height = 0;
+        let dpr = 1;
+
+        const particles: {
+            x: number;
+            y: number;
+            vx: number;
+            vy: number;
+            r: number;
+        }[] = [];
+
+        let animationFrame = 0;
+
+        const resize = () => {
+            const rect = page.getBoundingClientRect();
+
+            width = rect.width;
+            height = rect.height;
+
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+            canvas.width = Math.round(width * dpr);
+            canvas.height = Math.round(height * dpr);
+
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+            const particleCount = Math.min(
+                120,
+                Math.max(28, Math.round((width * height) / 13000))
+            );
+
+            particles.length = 0;
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.34,
+                    vy: (Math.random() - 0.5) * 0.34,
+                    r: Math.random() * 1.6 + 0.9,
+                });
+            }
+        };
+
+        const animate = () => {
+            ctx.clearRect(0, 0, width, height);
+
+            for (const particle of particles) {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+
+                if (particle.x < 0 || particle.x > width) {
+                    particle.vx *= -1;
+                }
+
+                if (particle.y < 0 || particle.y > height) {
+                    particle.vy *= -1;
+                }
+            }
+
+            ctx.beginPath();
+
+            const linkDistance = 132;
+
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const a = particles[i];
+                    const b = particles[j];
+
+                    const dx = a.x - b.x;
+                    const dy = a.y - b.y;
+
+                    const distanceSquared = dx * dx + dy * dy;
+
+                    if (distanceSquared < linkDistance * linkDistance) {
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                    }
+                }
+            }
+
+            ctx.strokeStyle = "rgba(120, 180, 255, 0.16)";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            ctx.fillStyle = "rgba(150, 210, 255, 0.8)";
+
+            for (const particle of particles) {
+                ctx.beginPath();
+
+                ctx.arc(
+                    particle.x,
+                    particle.y,
+                    particle.r,
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.fill();
+            }
+
+            animationFrame = requestAnimationFrame(animate);
+        };
+
+        resize();
+        animate();
+
+        window.addEventListener("resize", resize);
+
+        return () => {
+            cancelAnimationFrame(animationFrame);
+            window.removeEventListener("resize", resize);
+        };
+    }, []);
+}
+
 function loadAboutSectionFadeAnim(
     aboutRef: React.RefObject<HTMLElement | null>,
     aboutSectionLeftRef: React.RefObject<HTMLDivElement | null>,
@@ -47,16 +178,35 @@ function loadAboutSectionFadeAnim(
 // Rendering Page //
 export default function Home() {
     // Declaring Variables //
+    const pageRef = useRef<HTMLDivElement | null>(null);
+    const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
     const aboutRef = useRef<HTMLElement | null>(null);
     const aboutSectionLeftRef = useRef<HTMLDivElement | null>(null);
     const aboutSectionRightRef = useRef<HTMLDivElement | null>(null);
 
     // Loading "useEffects" //
+    loadBackgroundAnim(pageRef, canvasRef);
     loadAboutSectionFadeAnim(aboutRef, aboutSectionLeftRef, aboutSectionRightRef);
 
     // Rendering HTML //
     return (
-        <div className={styles.page}>
+        <div ref={pageRef} className={styles.page}>
+
+            {/* ------------------------------------------------------- */}
+            {/* Background animation copied from https://codefronts.com */}
+            {/* ------------------------------------------------------- */}
+
+            <canvas
+                ref={canvasRef}
+                className={styles.backgroundCanvas}
+                aria-hidden="true"
+            />
+
+            <div
+                className={styles.backgroundWash}
+                aria-hidden="true"
+            />
 
             {/* ------------ */}
             {/* Hero Section */}
@@ -219,16 +369,6 @@ export default function Home() {
                             </div>
 
                             <div className={styles.editor__textarea}>
-                                <span className={styles["editor__textarea-line"]}>5</span>
-
-                                <div>
-                                    &nbsp;&nbsp;
-                                    monthsBuilding:&nbsp;
-                                    <span className={styles["editor__textarea-number"]}>8</span>,
-                                </div>
-                            </div>
-
-                            <div className={styles.editor__textarea}>
                                 <span className={styles["editor__textarea-line"]}>6</span>
 
                                 <div>
@@ -241,10 +381,11 @@ export default function Home() {
                             <div className={styles.editor__textarea}>
                                 <span className={styles["editor__textarea-line"]}>7</span>
 
-                                <div>
+                                <div className={styles["editor__textarea-code"]}>
                                     &nbsp;&nbsp;
                                     openToWork:&nbsp;
-                                    <span className={styles["editor__textarea-keyword"]}>true</span>,
+                                    <span className={styles["editor__textarea-keyword"]}>true</span>
+                                    <span className={styles["editor__textarea-cursor"]} />
                                 </div>
                             </div>
 
