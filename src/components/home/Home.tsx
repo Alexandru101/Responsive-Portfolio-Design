@@ -10,7 +10,7 @@ import { FaGithub, FaLinkedin, FaTwitter, FaCircle } from "react-icons/fa";
 import { BiChevronDown } from "react-icons/bi";
 
 // Functions //
-function loadBackgroundAnim(
+function useBackgroundAnim(
     pageRef: React.RefObject<HTMLDivElement | null>,
     canvasRef: React.RefObject<HTMLCanvasElement | null>
 ) {
@@ -138,10 +138,10 @@ function loadBackgroundAnim(
             cancelAnimationFrame(animationFrame);
             window.removeEventListener("resize", resize);
         };
-    }, []);
+    }, [pageRef, canvasRef]);
 }
 
-function loadAboutSectionFadeAnim(
+function useAboutSectionFadeAnim(
     aboutRef: React.RefObject<HTMLElement | null>,
     aboutSectionLeftRef: React.RefObject<HTMLDivElement | null>,
     aboutSectionRightRef: React.RefObject<HTMLDivElement | null>
@@ -172,7 +172,7 @@ function loadAboutSectionFadeAnim(
         return () => {
             obsserver.disconnect();
         };
-    }, [])
+    }, [aboutRef, aboutSectionLeftRef, aboutSectionRightRef]);
 };
 
 // Rendering Page //
@@ -186,8 +186,8 @@ export default function Home() {
     const aboutSectionRightRef = useRef<HTMLDivElement | null>(null);
 
     // Loading "useEffects" //
-    loadBackgroundAnim(pageRef, canvasRef);
-    loadAboutSectionFadeAnim(aboutRef, aboutSectionLeftRef, aboutSectionRightRef);
+    useBackgroundAnim(pageRef, canvasRef);
+    useAboutSectionFadeAnim(aboutRef, aboutSectionLeftRef, aboutSectionRightRef);
 
     // Rendering HTML //
     return (
