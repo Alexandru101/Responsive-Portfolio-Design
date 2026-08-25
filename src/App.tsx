@@ -18,8 +18,7 @@ function App() {
           {/* Landing Page */}
           <Route path={"/"} element={<Navigate to="home" replace />} />
           <Route path={"home"} element={<Home />} />
-
-          {/* Secondary Pages */}
+          
         </Route>
       </Routes>
     </BrowserRouter>
