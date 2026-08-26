@@ -290,7 +290,6 @@
 
 .editor {
     width: 100%;
-    font-size: 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -366,6 +365,7 @@
 
 .editor__textarea {
     width: 100%;
+    font-size: 0.6rem;
     font-family: monospace;
     display: flex;
     align-items: center;
@@ -510,8 +510,8 @@
         transform: translateX(30);
     }
 
-    .editor {
-        font-size: 0.9rem;
+    .editor__textarea {
+        font-size: 0.85rem;
     }
 }
 
