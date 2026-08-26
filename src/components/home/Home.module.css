@@ -290,6 +290,7 @@
 
 .editor {
     width: 100%;
+    font-size: 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -507,6 +508,10 @@
     .about__rightSide {
         width: 50%;
         transform: translateX(30);
+    }
+
+    .editor {
+        font-size: 0.9rem;
     }
 }
 
